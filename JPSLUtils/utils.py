@@ -12,7 +12,7 @@ def OTJS(script):
     aka: One Time Javascript.
 
     This wraps a call to display(JS(script)) so that it will not run again
-    after 60 seconds have passed. This overcomes the way javascript from
+    after 15 seconds have passed. This overcomes the way javascript from
     python is embedded in the notebook metadata. When a notebook with embedded
     javascript is reopened and trusted all the javascript calls are run again.
     This is fine for utility functions, but not necessarily things that are
@@ -22,7 +22,7 @@ def OTJS(script):
     """
     from IPython.display import Javascript as JS
     from time import time as baseseconds
-    limit = 1000*(baseseconds()+60)
+    limit = 1000*(baseseconds()+15)
     scriptstr = """
     if (Date.now() > $LIMIT){
         //alert('old do not run')
@@ -138,10 +138,11 @@ def record_names_timestamp():
     from time import ctime
     from IPython.display import display, HTML
     from IPython.display import Javascript as JS
-    userstr = 'User: ' + environ['USER'] + ' | Computer: ' + \
-              uname()[1] + ' | Time: ' + ctime()
+    userstr = 'Initialization -- Computer: ' + uname()[1] +' | User: ' + \
+              environ['USER'] +  ' | Time: ' + ctime()
     display(HTML(
-        '<span id="Last-User" style="font-weight:bold;">' + userstr + '</span>'))
+        '<div id="Last-User" style="font-weight:bold;">' + userstr +
+        '</div>'))
     select_containing_cell("Last-User")
     OTJS('JPSLUtils.record_names()')
     pass
