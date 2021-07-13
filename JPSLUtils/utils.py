@@ -7,6 +7,35 @@ Physical Science Lab modules.
 # Jupyter JS call utilities
 #    Some of these are duplicated in pure javascript in the JPSLUtils.js file.
 ######
+def OTJS(script):
+    """
+    aka: One Time Javascript.
+
+    This wraps a call to display(JS(script)) so that it will not run again
+    after 60 seconds have passed. This overcomes the way javascript from
+    python is embedded in the notebook metadata. When a notebook with embedded
+    javascript is reopened and trusted all the javascript calls are run again.
+    This is fine for utility functions, but not necessarily things that are
+    only expected to run if a particular cell is executed.
+    :param script: string representing a javascript.
+    :return:
+    """
+    from IPython.display import Javascript as JS
+    from time import time as baseseconds
+    limit = 1000*(baseseconds()+60)
+    scriptstr = """
+    if (Date.now() > $LIMIT){
+        //alert('old do not run')
+    } else{
+        $SCRIPT
+    }
+    """
+    scriptstr = scriptstr.replace('$LIMIT',str(limit))
+    scriptstr = scriptstr.replace('$SCRIPT',script)
+    # print(scriptstr)
+    display(JS(scriptstr))
+    pass
+
 def new_cell_immediately_below():
     from IPython.display import display, HTML
     from IPython.display import Javascript as JS
@@ -114,7 +143,18 @@ def record_names_timestamp():
     display(HTML(
         '<span id="Last-User" style="font-weight:bold;">' + userstr + '</span>'))
     select_containing_cell("Last-User")
-    display(JS('JPSLUtils.record_names()'))
+    OTJS('JPSLUtils.record_names()')
+    pass
+
+def timestamp():
+    from os import environ, uname
+    from time import ctime
+    from IPython.display import display, HTML
+    from IPython.display import Javascript as JS
+    userstr = 'User: ' + environ['USER'] + ' | Computer: ' + \
+              uname()[1] + ' | Time: ' + ctime()
+    display(HTML(
+        '<span id="Last-User" style="font-weight:bold;">' + userstr + '</span>'))
     pass
 
 ######
