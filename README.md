@@ -18,6 +18,10 @@ result from javascript. Some custom dialogs for user interaction are also
 included.
 
 #### Change Log
+  * 0.5.3 add `select_containing_cell` and 
+    `insert_text_at_beginning_of_current_cell` to JS routines. Add python calls
+    `havenp()` to check for `numpy as np` and `havepd()`
+    to check for `pandas as pd`  in user name space.
   * 0.5.2 Minor bug fixes and updates to README.
   * 0.5.1 Introduced "one time Javascript" (`OTJS(...)`) alternative to 
     `display(JS(...))`. This allows javascript calls from python that will 

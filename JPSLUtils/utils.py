@@ -159,6 +159,32 @@ def timestamp():
     pass
 
 ######
+# User namespace diagnostics and module checking
+######
+
+def havepd():
+    """
+    Checks to see if pandas is imported into the ipython user namespace as pd.
+    :return: True if the name pd refers to pandas, otherwise false.
+    """
+    tst1 = getattr(get_ipython().user_module,'pd', False)
+    if tst1:
+        return hasattr(tst1,'DataFrame')
+    else:
+        return tst1
+
+def havenp():
+    """
+    Checks to see if numpy is imported into the ipython user namespace as np.
+    :return: True if the name np refers to numpy, otherwise false.
+    """
+    tst1 = getattr(get_ipython().user_module,'np',False)
+    if tst1:
+        return hasattr(tst1,'nan')
+    else:
+        return tst1
+
+######
 # Pandas and Figures routines
 ######
 
