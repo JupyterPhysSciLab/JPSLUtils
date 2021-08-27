@@ -18,7 +18,8 @@ result from javascript. Some custom dialogs for user interaction are also
 included.
 
 #### Change Log
-  * 0.5.4 added cell hiding toggle, which cells chosen with instructor tools.
+  * 0.5.4 added cell hiding toggle, which cells to hide chosen with instructor 
+    tools.
   * 0.5.3 add `select_containing_cell` and 
     `insert_text_at_beginning_of_current_cell` to JS routines. Add python calls
     `havenp()` to check for `numpy as np` and `havepd()`
