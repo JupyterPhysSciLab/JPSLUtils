@@ -6,7 +6,8 @@ Cell Utilities
 */
 
 JPSLUtils.select_containing_cell = function(elem){
-    //Create a synthetic click in the cell to force selection of the cell containing the table
+    //Create a synthetic click in the cell to force selection of the cell
+    // containing the element (elem).
     var event = new MouseEvent('click', {
     view: window,
     bubbles: true,
@@ -34,6 +35,28 @@ JPSLUtils.insert_text_at_beginning_of_current_cell = function(text){
     Jupyter.notebook.get_selected_cell().code_mirror.doc.
            replaceSelection(text);
 };
+
+JPSLUtils.hide_hide_on_print_cells = function(){
+    var celllist = Jupyter.notebook.get_cells();
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL){
+            if (celllist[i].metadata.JPSL.hide_on_print==true){
+                celllist[i].element[0].classList.add("hidden");
+            }
+        }
+    }
+}
+
+JPSLUtils.show_hide_on_print_cells = function(){
+    var celllist = Jupyter.notebook.get_cells();
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL){
+            if (celllist[i].metadata.JPSL.hide_on_print==true){
+                celllist[i].element[0].classList.remove("hidden");
+            }
+        }
+    }
+}
 
 /*
 input/textarea utilities
