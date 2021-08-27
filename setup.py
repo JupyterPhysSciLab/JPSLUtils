@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="JPSLUtils",
-    version="0.5.3",
+    version="0.5.4rc0",
     description="Utilities for Jupyter Physical Science Lab project",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -17,9 +17,7 @@ setuptools.setup(
     package_data={'JPSLUtils': ['javascript/*.js']},
     include_package_data=True,
     install_requires=[
-        # 'python>=3.6',
         'jupyter>=1.0.0',
-        #'pandas>=0.22.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
