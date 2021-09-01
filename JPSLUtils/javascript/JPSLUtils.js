@@ -127,10 +127,9 @@ JPSLUtils.record_names = function(){
     tmp.innerHTML = '<textarea cols="30" onblur="JPSLUtils.record_input(this)"/>';
     dlg.append(tmp);
     $(dlg).dialog({modal:true,
-                  close: function(){$(this).dialog('destroy')},
+                  classes:{'ui-dialog-titlebar-close' : 'hidden'
+                  },
                   buttons:[
-                  {text: 'Cancel',
-                  click: function(){$(this).dialog('destroy')}},
                   {text: 'OK/Do It',
                   click: function(){var rcrd = document.getElementById(
                                     'Last-User');
