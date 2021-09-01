@@ -4,20 +4,27 @@
 #### Introduction
 These are utilities used by multiple packages within the [Jupyter Physical
 Science Lab project](https://github.com/JupyterPhysSciLab). It is unlikely 
-that anyone 
-but a 
-developer would
+that anyone but a developer would
 have reason to install these independently. They are installed when
 required by other packages/modules.
 
 #### Contents
-This package mostly provides tools for running javascript operations that
+* This package mostly provides tools for running javascript operations that
 impact the notebook. This includes things such as selecting a certain cell,
 inserting text into an existing cell, or running python code and using the
 result from javascript. Some custom dialogs for user interaction are also
 included.
+* `JPSL Tools` menu is installed as well. This provides menu access to some
+of the javascript operations:
+    * __Hide cells__ that are marked as `hide_on_print` in the cell metadata.
+    This metadata can be set from a menu provided by the 
+      [jupyter-instructortools](https://github.com/JupyterPhysSciLab/jupyter-instructortools)
+      package. The meta-data can also be set manually, by editing it in the
+      notebook.
+    * __De-hide cells__ marked as `hide_on_print` in the cell metadata.
 
 #### Change Log
+  * 0.5.5 added `JPSL Tools` menu to access cell hiding.
   * 0.5.4 added cell hiding toggle, which cells to hide chosen with instructor 
     tools.
   * 0.5.3 add `select_containing_cell` and 
