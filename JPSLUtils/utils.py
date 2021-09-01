@@ -391,3 +391,8 @@ del mydir
 del display
 del HTML
 del os
+
+######
+# Install JPSL Tools Menu
+######
+OTJS('JPSLUtils.createJPSLToolsMenu();')

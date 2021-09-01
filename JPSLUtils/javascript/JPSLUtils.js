@@ -161,3 +161,34 @@ JPSLUtils.record_names = function(){
     dlg.focus();
     Jupyter.notebook.keyboard_manager.enabled=false; //Make sure keyboard manager doesn't grab inputs.
 };
+
+/*
+JPSL Tools Menu
+*/
+JPSLUtils.createJPSLToolsMenu = function(){
+    if(!document.getElementById('JPSLToolsmnu')){
+        var newselect=document.createElement('select');
+        newselect.id = 'JPSLToolsmnu';
+        newselect.classList.add('form-control'); //class to match notebook formatting
+        newselect.classList.add('select-xs'); //class to match notebook formatting
+        newselect.setAttribute('style','color:green;')
+        newselect.onchange=function(){
+            var lastvalue = this.value;
+            this.value='JPSL Tools';
+            if (lastvalue=='Hide Cells'){
+                JPSLUtils.hide_hide_on_print_cells();
+            }
+            if (lastvalue=='Undo Hide Cells'){
+                JPSLUtils.show_hide_on_print_cells();
+            }
+        }
+        var optiontxt = '<option title="Choose an option below"> \
+        JPSL Tools</option>';
+        optiontxt+='<option title="Hide cells set to hide-on-print"> \
+        Hide Cells</option>';
+        optiontxt+='<option title="Redisplay cells set to hide-on-print"> \
+        Undo Hide Cells</option>';
+        newselect.innerHTML=optiontxt;
+        document.getElementById('maintoolbar-container').appendChild(newselect);
+    }
+}
