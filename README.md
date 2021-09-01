@@ -24,7 +24,9 @@ of the javascript operations:
     * __De-hide cells__ marked as `hide_on_print` in the cell metadata.
 
 #### Change Log
-  * 0.5.5 added `JPSL Tools` menu to access cell hiding.
+  * 0.5.5 
+    * added `JPSL Tools` menu to access cell hiding.
+    * record name dialog cannot be cancelled.
   * 0.5.4 added cell hiding toggle, which cells to hide chosen with instructor 
     tools.
   * 0.5.3 add `select_containing_cell` and 
