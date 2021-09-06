@@ -395,4 +395,4 @@ del os
 ######
 # Install JPSL Tools Menu
 ######
-OTJS('JPSLUtils.createJPSLToolsMenu();')
+OTJS('JPSLUtils.createJPSLToolsMenu(); JPSLUtils.init();')

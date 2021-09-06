@@ -16,7 +16,8 @@ result from javascript. Some custom dialogs for user interaction are also
 included.
 * `JPSL Tools` menu is installed as well. This provides menu access to some
 of the javascript operations:
-    * __Hide cells__ that are marked as `hide_on_print` in the cell metadata.
+    * __Hide cells__ that are marked as `JPSL.hide_on_print=true` in the cell 
+      metadata.
     This metadata can be set from a menu provided by the 
       [jupyter-instructortools](https://github.com/JupyterPhysSciLab/jupyter-instructortools)
       package. The meta-data can also be set manually, by editing it in the

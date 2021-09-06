@@ -1,6 +1,22 @@
 // Jupyter Notebook Utilities
 JPSLUtils = new Object();
-
+/*
+Initialization
+*/
+JPSLUtils.init = function(){
+    // Run all input table cells to make sure the tables are showing and
+    // active. Also hide the table creation code.
+    JPSLUtils.hide_input_table_code();hide_input_table_code
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.input_table_cell==true){
+                celllist[i].execute();
+            }
+        }
+    }
+    }
+    // Hide the code for cells marked with metadata.JPSL.hide_code = true.
+    JPSLUtils.hide_hide_code_code();
 /*
 Cell Utilities
 */
@@ -45,6 +61,7 @@ JPSLUtils.hide_hide_on_print_cells = function(){
             }
         }
     }
+    JPSLUtils.hide_hide_code_on_print_code();
 }
 
 JPSLUtils.show_hide_on_print_cells = function(){
@@ -56,8 +73,71 @@ JPSLUtils.show_hide_on_print_cells = function(){
             }
         }
     }
+        JPSLUtils.show_hide_code_on_print_code();
 }
 
+JPSLUtils.hide_input_table_code = function(){
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.input_table_cell==true){
+                celllist[i].input[0].classList.add("hidden");
+            }
+        }
+    }
+}
+
+JPSLUtils.show_input_table_code = function(){
+    var celllist = Jupyter.notebook.get_cells();
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.input_table_cell==true){
+                celllist[i].input[0].classList.remove("hidden");
+            }
+        }
+    }
+}
+
+JPSLUtils.hide_hide_code_code = function(){
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.hide_code==true){
+                celllist[i].input[0].classList.add("hidden");
+            }
+        }
+    }
+}
+
+JPSLUtils.show_hide_code_code = function(){
+    var celllist = Jupyter.notebook.get_cells();
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.hide_code==true){
+                celllist[i].input[0].classList.remove("hidden");
+            }
+        }
+    }
+}
+
+JPSLUtils.hide_hide_code_on_print_code = function(){
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.hide_code_on_print==true){
+                celllist[i].input[0].classList.add("hidden");
+            }
+        }
+    }
+}
+
+JPSLUtils.show_hide_code_on_print_code = function(){
+    var celllist = Jupyter.notebook.get_cells();
+    for (var i = 0;i<celllist.length;i++){
+        if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
+            if (celllist[i].metadata.JPSL.hide_code_on_print==true){
+                celllist[i].input[0].classList.remove("hidden");
+            }
+        }
+    }
+}
 /*
 input/textarea utilities
 */
