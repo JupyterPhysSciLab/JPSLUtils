@@ -23,8 +23,16 @@ of the javascript operations:
       package. The meta-data can also be set manually, by editing it in the
       notebook.
     * __De-hide cells__ marked as `hide_on_print` in the cell metadata.
+    * __Hide/Show__ input table creation code.
+    * __Hide/Show__ code marked as hidden. Set using
+    [jupyter-instructortools](https://github.com/JupyterPhysSciLab/jupyter-instructortools).
 
 #### Change Log
+  * 0.5.6
+    * added `hide/show` input table creation code.
+    * added `hide/show` hidden code.
+    * initialization now hides input table creation code.
+    * initialization now hides code marked for hiding.
   * 0.5.5 
     * added `JPSL Tools` menu to access cell hiding.
     * record name dialog cannot be cancelled.

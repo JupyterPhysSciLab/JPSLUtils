@@ -6,7 +6,8 @@ Initialization
 JPSLUtils.init = function(){
     // Run all input table cells to make sure the tables are showing and
     // active. Also hide the table creation code.
-    JPSLUtils.hide_input_table_code();hide_input_table_code
+    JPSLUtils.hide_input_table_code();
+    var celllist = Jupyter.notebook.get_cells();
     for (var i = 0;i<celllist.length;i++){
         if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
             if (celllist[i].metadata.JPSL.input_table_cell==true){
@@ -14,9 +15,10 @@ JPSLUtils.init = function(){
             }
         }
     }
-    }
     // Hide the code for cells marked with metadata.JPSL.hide_code = true.
     JPSLUtils.hide_hide_code_code();
+};
+
 /*
 Cell Utilities
 */
@@ -62,7 +64,7 @@ JPSLUtils.hide_hide_on_print_cells = function(){
         }
     }
     JPSLUtils.hide_hide_code_on_print_code();
-}
+};
 
 JPSLUtils.show_hide_on_print_cells = function(){
     var celllist = Jupyter.notebook.get_cells();
@@ -74,9 +76,10 @@ JPSLUtils.show_hide_on_print_cells = function(){
         }
     }
         JPSLUtils.show_hide_code_on_print_code();
-}
+};
 
 JPSLUtils.hide_input_table_code = function(){
+    var celllist = Jupyter.notebook.get_cells();
     for (var i = 0;i<celllist.length;i++){
         if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
             if (celllist[i].metadata.JPSL.input_table_cell==true){
@@ -84,7 +87,7 @@ JPSLUtils.hide_input_table_code = function(){
             }
         }
     }
-}
+};
 
 JPSLUtils.show_input_table_code = function(){
     var celllist = Jupyter.notebook.get_cells();
@@ -95,9 +98,10 @@ JPSLUtils.show_input_table_code = function(){
             }
         }
     }
-}
+};
 
 JPSLUtils.hide_hide_code_code = function(){
+    var celllist = Jupyter.notebook.get_cells();
     for (var i = 0;i<celllist.length;i++){
         if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
             if (celllist[i].metadata.JPSL.hide_code==true){
@@ -105,7 +109,7 @@ JPSLUtils.hide_hide_code_code = function(){
             }
         }
     }
-}
+};
 
 JPSLUtils.show_hide_code_code = function(){
     var celllist = Jupyter.notebook.get_cells();
@@ -116,9 +120,10 @@ JPSLUtils.show_hide_code_code = function(){
             }
         }
     }
-}
+};
 
 JPSLUtils.hide_hide_code_on_print_code = function(){
+    var celllist = Jupyter.notebook.get_cells();
     for (var i = 0;i<celllist.length;i++){
         if (celllist[i].metadata.JPSL && celllist[i].cell_type=='code'){
             if (celllist[i].metadata.JPSL.hide_code_on_print==true){
@@ -126,7 +131,7 @@ JPSLUtils.hide_hide_code_on_print_code = function(){
             }
         }
     }
-}
+};
 
 JPSLUtils.show_hide_code_on_print_code = function(){
     var celllist = Jupyter.notebook.get_cells();
@@ -137,7 +142,8 @@ JPSLUtils.show_hide_code_on_print_code = function(){
             }
         }
     }
-}
+};
+
 /*
 input/textarea utilities
 */
@@ -257,8 +263,17 @@ JPSLUtils.createJPSLToolsMenu = function(){
             if (lastvalue=='Hide Cells'){
                 JPSLUtils.hide_hide_on_print_cells();
             }
-            if (lastvalue=='Undo Hide Cells'){
-                JPSLUtils.show_hide_on_print_cells();
+            if (lastvalue=='Show Table Creation Code'){
+                JPSLUtils.show_input_table_code();
+            }
+            if (lastvalue=='Hide Table Creation Code'){
+                JPSLUtils.hide_input_table_code();
+            }
+            if (lastvalue=='Show Hidden Code'){
+                JPSLUtils.show_hide_code_code();
+            }
+            if (lastvalue=='Re-Hide Hidden Code'){
+                JPSLUtils.hide_hide_code_code();
             }
         }
         var optiontxt = '<option title="Choose an option below"> \
@@ -267,6 +282,14 @@ JPSLUtils.createJPSLToolsMenu = function(){
         Hide Cells</option>';
         optiontxt+='<option title="Redisplay cells set to hide-on-print"> \
         Undo Hide Cells</option>';
+        optiontxt+='<option title="Show input table creation code"> \
+        Show Table Creation Code</option>';
+        optiontxt+='<option title="Hide input table creation code"> \
+        Hide Table Creation Code</option>';
+        optiontxt+='<option title="Show hidden code cells"> \
+        Show Hidden Code</option>';
+        optiontxt+='<option title="Re-hide hidden code cells"> \
+        Re-Hide Hidden Code</option>';
         newselect.innerHTML=optiontxt;
         document.getElementById('maintoolbar-container').appendChild(newselect);
     }
