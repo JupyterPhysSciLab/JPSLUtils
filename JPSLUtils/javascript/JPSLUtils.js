@@ -263,6 +263,9 @@ JPSLUtils.createJPSLToolsMenu = function(){
             if (lastvalue=='Hide Cells'){
                 JPSLUtils.hide_hide_on_print_cells();
             }
+            if (lastvalue=='Undo Hide Cells'){
+                JPSLUtils.show_hide_on_print_cells();
+            }
             if (lastvalue=='Show Table Creation Code'){
                 JPSLUtils.show_input_table_code();
             }
