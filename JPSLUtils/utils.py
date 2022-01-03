@@ -2,6 +2,16 @@
 Utility routines that are useful for more than one package in the Jupyter
 Physical Science Lab modules.
 """
+######
+# JPSL Tools Menu
+######
+
+def JPSL_Tools_Menu():
+    '''
+    Installs and activates the JPSL Tools menu
+    '''
+    OTJS('JPSLUtils.createJPSLToolsMenu(); JPSLUtils.init();')
+    pass
 
 ######
 # Jupyter JS call utilities
@@ -391,8 +401,3 @@ del mydir
 del display
 del HTML
 del os
-
-######
-# Install JPSL Tools Menu
-######
-OTJS('JPSLUtils.createJPSLToolsMenu(); JPSLUtils.init();')
