@@ -14,8 +14,10 @@ impact the notebook. This includes things such as selecting a certain cell,
 inserting text into an existing cell, or running python code and using the
 result from javascript. Some custom dialogs for user interaction are also
 included.
-* `JPSL Tools` menu is installed as well. This provides menu access to some
-of the javascript operations:
+* `JPSL Tools` menu can be installed as well. The command to activate it 
+  from python is `JPSL_Tools_Menu():`; from javascript 
+ `JPSLUtils.createJPSLToolsMenu(); JPSLUtils.init();`. This provides menu 
+  access to some of the javascript operations:
     * __Hide cells__ that are marked as `JPSL.hide_on_print=true` in the cell 
       metadata.
     This metadata can be set from a menu provided by the 
@@ -26,7 +28,9 @@ of the javascript operations:
     * __Hide/Show__ input table creation code.
     * __Hide/Show__ code marked as hidden. Set using
     [jupyter-instructortools](https://github.com/JupyterPhysSciLab/jupyter-instructortools).
-
+* __NOTE__: if you wish input table creation code and selected code cells 
+  hidden without the menu being available, then you need to issue the command 
+  `OTJS(JPSLUtils.init();)` in python or just `JPSLUtils.init();` in javascript.
 #### Change Log
   * 0.5.6
     * added `hide/show` input table creation code.
