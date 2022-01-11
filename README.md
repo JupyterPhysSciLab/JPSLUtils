@@ -30,8 +30,15 @@ included.
     [jupyter-instructortools](https://github.com/JupyterPhysSciLab/jupyter-instructortools).
 * __NOTE__: if you wish input table creation code and selected code cells 
   hidden without the menu being available, then you need to issue the command 
-  `OTJS(JPSLUtils.init();)` in python or just `JPSLUtils.init();` in javascript.
+  `OTJS('JPSLUtils.init();')` in python or just `JPSLUtils.init();` in 
+  javascript.
 #### Change Log
+  * 0.5.7
+    * __Breaking change__: JPSL Tools menu is not automatically activated when
+      this package is imported. It now must be activated by an explicit call to
+      `JPSLUtils.JPSL_Tools_Menu()`.
+    * Can now have package hide table creation code and selected code cells 
+      without the menu showing. The call is `OTJS('JPSLUtils.init();')`
   * 0.5.6
     * added `hide/show` input table creation code.
     * added `hide/show` hidden code.
