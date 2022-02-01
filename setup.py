@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="JPSLUtils",
-    version="0.5.7",
+    version="0.5.8rc0",
     description="Utilities for Jupyter Physical Science Lab project",
     long_description=long_description,
     long_description_content_type="text/markdown",
