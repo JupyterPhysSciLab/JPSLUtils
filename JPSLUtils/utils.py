@@ -82,6 +82,17 @@ def insert_text_into_next_cell(text):
                'replaceSelection("' + text + '");'))
     pass
 
+def replace_text_of_next_cell(text):
+    from IPython.display import display, HTML
+    from IPython.display import Javascript as JS
+    display(JS('Jupyter.notebook.select_next(true);' \
+               'JPSLUtils.replace_text_of_current_cell("' + text + '");'))
+
+def replace_text_of_current_cell(text):
+    from IPython.display import display, HTML
+    from IPython.display import Javascript as JS
+    display(JS('JPSLUtils.replace_text_of_current_cell("' + text + '");'))
+
 
 def insert_text_at_beginning_of_current_cell(text):
     # append \n to line insert as a separate line.
@@ -112,25 +123,8 @@ def select_containing_cell(elemID):
     from IPython.display import Javascript as JS
     # Create a synthetic click in the cell to force selection of the cell
     # containing the table
-    display(JS(
-    'var event = new MouseEvent("click", {' \
-    'view: window,' \
-    'bubbles: true,' \
-    'cancelable: true' \
-    '});' \
-    'var start = new Date().getTime();' \
-    'var elem = document.getElementById("'+elemID+'");' \
-    'do {' \
-    'elem = document.getElementById("'+elemID+'");' \
-    '} while ((elem == null) && (new Date().getTime() < start+5000));' \
-    'if (elem == null){' \
-    'alert("It took more than 5 seconds to build element.");}' \
-    'var cancelled = !elem.dispatchEvent(event);' \
-    'if (cancelled) {' \
-    # A handler called preventDefault.
-    'alert("Something is wrong. Try running the cell that creates this GUI' \
-           '.");' \
-    '}'))
+    display(JS('var elem = document.getElementById("'+elemID+'");' \
+             'JPSLUtils.select_containing_cell(elem);'))
     pass
 
 def delete_selected_cell():

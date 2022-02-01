@@ -34,8 +34,16 @@ JPSLUtils.select_containing_cell = function(elem){
     var cancelled = !elem.dispatchEvent(event);
     if (cancelled) {
     // A handler called preventDefault.
-    alert("Something is wrong. Try running the cell that creates this table.");
+    alert("Something is wrong. Try rerunning the cell.");
     }
+};
+
+JPSLUtils.select_cell_immediately_below = function(){
+    Jupyter.notebook.select_next(true);
+};
+
+JPSLUtils.replace_text_of_current_cell = function(text){
+    Jupyter.notebook.get_selected_cell().set_text(text);
 };
 
 JPSLUtils.insert_newline_at_end_of_current_cell = function(text){
