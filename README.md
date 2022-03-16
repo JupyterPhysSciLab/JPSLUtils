@@ -33,6 +33,8 @@ included.
   `OTJS('JPSLUtils.init();')` in python or just `JPSLUtils.init();` in 
   javascript.
 #### Change Log
+  * 0.5.8
+    * additional insert text and selection utilities
   * 0.5.7
     * __Breaking change__: JPSL Tools menu is not automatically activated when
       this package is imported. It now must be activated by an explicit call to
