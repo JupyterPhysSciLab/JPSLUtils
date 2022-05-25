@@ -33,6 +33,9 @@ included.
   `OTJS('JPSLUtils.init();')` in python or just `JPSLUtils.init();` in 
   javascript.
 #### Change Log
+  * 0.5.9
+    * Switch to using hierarchical menus.
+    * Now requires JPSLMenus package.
   * 0.5.8
     * additional insert text and selection utilities
   * 0.5.7

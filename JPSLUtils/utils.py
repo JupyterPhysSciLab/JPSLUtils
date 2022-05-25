@@ -370,6 +370,7 @@ class notice_group():
 ######
 # Install JS support when this is imported with from JPSLUtils import *
 ######
+import JPSLMenus # This loads the menu support javascript.
 import os
 from IPython.display import display, HTML
 
