@@ -259,49 +259,86 @@ JPSLUtils.record_names = function(){
 JPSL Tools Menu
 */
 JPSLUtils.createJPSLToolsMenu = function(){
-    if(!document.getElementById('JPSLToolsmnu')){
-        var newselect=document.createElement('select');
-        newselect.id = 'JPSLToolsmnu';
-        newselect.classList.add('form-control'); //class to match notebook formatting
-        newselect.classList.add('select-xs'); //class to match notebook formatting
-        newselect.setAttribute('style','color:green;')
-        newselect.onchange=function(){
-            var lastvalue = this.value;
-            this.value='JPSL Tools';
-            if (lastvalue=='Hide Cells'){
-                JPSLUtils.hide_hide_on_print_cells();
-            }
-            if (lastvalue=='Undo Hide Cells'){
-                JPSLUtils.show_hide_on_print_cells();
-            }
-            if (lastvalue=='Show Table Creation Code'){
-                JPSLUtils.show_input_table_code();
-            }
-            if (lastvalue=='Hide Table Creation Code'){
-                JPSLUtils.hide_input_table_code();
-            }
-            if (lastvalue=='Show Hidden Code'){
-                JPSLUtils.show_hide_code_code();
-            }
-            if (lastvalue=='Re-Hide Hidden Code'){
-                JPSLUtils.hide_hide_code_code();
-            }
-        }
-        var optiontxt = '<option title="Choose an option below"> \
-        JPSL Tools</option>';
-        optiontxt+='<option title="Hide cells set to hide-on-print"> \
-        Hide Cells</option>';
-        optiontxt+='<option title="Redisplay cells set to hide-on-print"> \
-        Undo Hide Cells</option>';
-        optiontxt+='<option title="Show input table creation code"> \
-        Show Table Creation Code</option>';
-        optiontxt+='<option title="Hide input table creation code"> \
-        Hide Table Creation Code</option>';
-        optiontxt+='<option title="Show hidden code cells"> \
-        Show Hidden Code</option>';
-        optiontxt+='<option title="Re-hide hidden code cells"> \
-        Re-Hide Hidden Code</option>';
-        newselect.innerHTML=optiontxt;
-        document.getElementById('maintoolbar-container').appendChild(newselect);
+    if(!document.getElementById('JPSL_Tools')){
+        var hidecells = {'type':'action',
+                            'title':'Hide Cells',
+                            'data':"JPSLUtils.hide_hide_on_print_cells();"
+                          };
+        var showcells = {'type':'action',
+                            'title':'Undo Hide Cells',
+                            'data':"JPSLUtils.show_hide_on_print_cells();"
+                          };
+        var showtablecode = {'type':'action',
+                            'title':'Show Table Creation Code',
+                            'data':"JPSLUtils.show_input_table_code();"
+                          };
+        var hidetablecode = {'type':'action',
+                            'title':'Hide Table Creation Code',
+                            'data':"JPSLUtils.hide_input_table_code();"
+                          };
+        var showcode = {'type':'action',
+                            'title':'Show Hidden Code',
+                            'data':"JPSLUtils.show_hide_code_code();"
+                          };
+        var hidecode = {'type':'action',
+                            'title':'Re-Hide Hidden Code',
+                            'data':"JPSLUtils.hide_hide_code_code();"
+                          };
+        var initJupyterPiDAQ = {'type':'snippet',
+                                'title':'Initialize JupyterPiDAQ',
+                                'data':["from jupyterpidaq.DAQinstance import *"]
+                                };
+        var JupyterPiDAQdocs = {'type':'url',
+                                'title':'Documentation',
+                                'data':"https://jupyterphysscilab.github.io/JupyterPiDAQ/"
+                                };
+        var PiDAQsubmn = {'type':'submenu',
+                         'title':"JupyterPiDAQ",
+                         'data':[initJupyterPiDAQ, JupyterPiDAQdocs]
+                         };
+        var initalgwsymp = {'type':'snippet',
+                            'title':'Initialize Algebra with Sympy',
+                            'data':["from algebra_with_sympy import *"]
+                            };
+        var algwsymdocs = {'type':'url',
+                           'title':'Documentation',
+                           'data':"https://gutow.github.io/Algebra_with_Sympy/"
+                           };
+        var algwsymsubmn = {'type':'submenu',
+                         'title':"Algebra with Sympy",
+                         'data':[initalgwsymp, algwsymdocs]
+                         };
+        var initpandasGUI = {'type':'snippet',
+                            'title':'Initialize GUI',
+                            'data':["from pandas_GUI import *"]
+                            };
+        var pandasGUIdocs = {'type':'url',
+                           'title':'Documentation',
+                           'data':"https://jupyterphysscilab.github.io/jupyter_Pandas_GUI/"
+                           };
+        var newcolGUI = {'type':'snippet',
+                            'title':'New Calculated Column GUI',
+                            'data':["new_pandas_column_GUI()"]
+                            };
+        var plotGUI = {'type':'snippet',
+                            'title':'Plot Pandas Data GUI',
+                            'data':["plot_pandas_GUI()"]
+                            };
+        var fitGUI = {'type':'snippet',
+                            'title':'Fit Pandas Data GUI',
+                            'data':["fit_pandas_GUI()"]
+                            };
+        var pandasGUIsubmn = {'type':'submenu',
+                         'title':"Jupyter Pandas GUI",
+                         'data':[initpandasGUI, pandasGUIdocs, newcolGUI,
+                         plotGUI, fitGUI]
+                         };
+        var menu = {'type':'menu',
+                    'title':'JPSL Tools',
+                    'data':[hidecells, showcells, showtablecode, hidetablecode,
+                     showcode, hidecode, algwsymsubmn, PiDAQsubmn, pandasGUIsubmn
+                    ]
+                    };
+        JPSLMenus.build(menu);
     }
 }

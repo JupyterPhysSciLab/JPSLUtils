@@ -18,6 +18,7 @@ setuptools.setup(
     include_package_data=True,
     install_requires=[
         'jupyter>=1.0.0',
+        'JPSLMenus'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
