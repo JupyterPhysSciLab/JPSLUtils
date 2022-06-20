@@ -28,6 +28,8 @@ included.
     * __Hide/Show__ input table creation code.
     * __Hide/Show__ code marked as hidden. Set using
     [jupyter-instructortools](https://github.com/JupyterPhysSciLab/jupyter-instructortools).
+    * __Snippets for initializing some JPSL components and links to their
+      documentation__ (JupyterPiDAQ, Jupyter Pandas GUI and Algebra with Sympy)
 * __NOTE__: if you wish input table creation code and selected code cells 
   hidden without the menu being available, then you need to issue the command 
   `OTJS('JPSLUtils.init();')` in python or just `JPSLUtils.init();` in 
