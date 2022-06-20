@@ -47,91 +47,67 @@ def OTJS(script):
     pass
 
 def new_cell_immediately_below():
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(
-        JS('Jupyter.notebook.focus_cell();' \
-           'Jupyter.notebook.insert_cell_below();'))
+    OTJS('Jupyter.notebook.focus_cell();' \
+           'Jupyter.notebook.insert_cell_below();')
     pass
 
 
 def select_cell_immediately_below():
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(JS('Jupyter.notebook.select_next(true);'))
-
+    OTJS('Jupyter.notebook.select_next(true);')
+    pass
 
 def move_cursor_in_current_cell(delta):
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(
-        JS('var curPos = Jupyter.notebook.get_selected_cell().code_' \
+    OTJS('var curPos = Jupyter.notebook.get_selected_cell().code_' \
            'mirror.doc.getCursor();' \
            'var curline = curPos.line; var curch = curPos.ch +' + str(
             delta) + ';' \
                      'Jupyter.notebook.get_selected_cell().code_mirror.' \
-                     'doc.setCursor({line:curline,ch:curch});'))
+                     'doc.setCursor({line:curline,ch:curch});')
     pass
 
 
 def insert_text_into_next_cell(text):
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(JS('Jupyter.notebook.select_next(true);' \
+    OTJS('Jupyter.notebook.select_next(true);' \
                'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
-               'replaceSelection("' + text + '");'))
+               'replaceSelection("' + text + '");')
     pass
 
 def replace_text_of_next_cell(text):
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(JS('Jupyter.notebook.select_next(true);' \
-               'JPSLUtils.replace_text_of_current_cell("' + text + '");'))
+    OTJS('Jupyter.notebook.select_next(true);' \
+               'JPSLUtils.replace_text_of_current_cell("' + text + '");')
 
 def replace_text_of_current_cell(text):
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(JS('JPSLUtils.replace_text_of_current_cell("' + text + '");'))
+    OTJS('JPSLUtils.replace_text_of_current_cell("' + text + '");')
 
 
 def insert_text_at_beginning_of_current_cell(text):
     # append \n to line insert as a separate line.
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(
-        JS('Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
+    OTJS('Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
            'setCursor({line:0,ch:0});' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
-           'replaceSelection("' + text + '");'))
+           'replaceSelection("' + text + '");')
     pass
 
 
 def insert_newline_at_end_of_current_cell(text):
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(
-        JS('var lastline = Jupyter.notebook.get_selected_cell().' \
+    OTJS('var lastline = Jupyter.notebook.get_selected_cell().' \
            'code_mirror.doc.lineCount();' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
            'setCursor(lastline,0);' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
-           'replaceSelection("\\n' + text + '");'))
+           'replaceSelection("\\n' + text + '");')
     pass
 
 def select_containing_cell(elemID):
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
     # Create a synthetic click in the cell to force selection of the cell
     # containing the table
-    display(JS('var elem = document.getElementById("'+elemID+'");' \
-             'JPSLUtils.select_containing_cell(elem);'))
+    OTJS('var elem = document.getElementById("'+elemID+'");' \
+             'JPSLUtils.select_containing_cell(elem);')
     pass
 
 def delete_selected_cell():
-    from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
-    display(JS('Jupyter.notebook.delete_cell(' \
-               'Jupyter.notebook.get_selected_index());'))
+    OTJS('Jupyter.notebook.delete_cell(' \
+               'Jupyter.notebook.get_selected_index());')
     pass
 
 ######
