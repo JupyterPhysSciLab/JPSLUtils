@@ -32,7 +32,14 @@ included.
   hidden without the menu being available, then you need to issue the command 
   `OTJS('JPSLUtils.init();')` in python or just `JPSLUtils.init();` in 
   javascript.
+
 #### Change Log
+  * 0.6.0rc
+    * Python cell actions no longer run when a trusted notebook is opened 
+      (using `OTJS
+      ()`).
+    * Reformatted the user name and partner information saved on each 
+      initialization.
   * 0.5.9
     * Switch to using hierarchical menus.
     * Now requires JPSLMenus package.
