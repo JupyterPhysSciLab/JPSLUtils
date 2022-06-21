@@ -99,8 +99,10 @@ def insert_newline_at_end_of_current_cell(text):
     pass
 
 def select_containing_cell(elemID):
-    # Create a synthetic click in the cell to force selection of the cell
-    # containing the table
+    """
+    Create a synthetic click in the cell to force selection of the cell
+    containing the table
+    """
     OTJS('var elem = document.getElementById("'+elemID+'");' \
              'JPSLUtils.select_containing_cell(elem);')
     pass
@@ -117,7 +119,6 @@ def record_names_timestamp():
     from os import environ, uname
     from time import ctime
     from IPython.display import display, HTML
-    from IPython.display import Javascript as JS
     userstr = 'Initialization -- Computer: ' + uname()[1] +' | User: ' + \
               environ['USER'] +  ' | Time: ' + ctime()
     display(HTML(
