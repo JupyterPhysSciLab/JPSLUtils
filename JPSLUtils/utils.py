@@ -27,7 +27,7 @@ def OTJS(script):
     javascript is reopened and trusted all the javascript calls are run again.
     This is fine for utility functions, but not necessarily things that are
     only expected to run if a particular cell is executed.
-    :param script: string representing a javascript.
+    :param script: valid javascript string.
     :return:
     """
     from IPython.display import Javascript as JS
@@ -47,16 +47,29 @@ def OTJS(script):
     pass
 
 def new_cell_immediately_below():
+    """
+    Inserts a new cell immediately below the currently selected cell.
+    :return:
+    """
     OTJS('Jupyter.notebook.focus_cell();' \
            'Jupyter.notebook.insert_cell_below();')
     pass
 
 
 def select_cell_immediately_below():
+    """
+    Selects the cell below the currently selected cell.
+    :return:
+    """
     OTJS('Jupyter.notebook.select_next(true);')
     pass
 
 def move_cursor_in_current_cell(delta):
+    """
+    Moves the cursor by the amount delta in a codemirror cell.
+    :param delta: change in cursor position.
+    :return:
+    """
     OTJS('var curPos = Jupyter.notebook.get_selected_cell().code_' \
            'mirror.doc.getCursor();' \
            'var curline = curPos.line; var curch = curPos.ch +' + str(
@@ -67,21 +80,44 @@ def move_cursor_in_current_cell(delta):
 
 
 def insert_text_into_next_cell(text):
+    """
+    Replaces the current selection in a codemirror cell with the contents of
+    text.
+    :param text: String to replace the selection with.
+    :return:
+    """
     OTJS('Jupyter.notebook.select_next(true);' \
                'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
                'replaceSelection("' + text + '");')
     pass
 
 def replace_text_of_next_cell(text):
+    """
+    Replaces the contents of the cell following the selected cell with the
+    contents of text.
+    :param text: String to replace the contents of the cell wtih.
+    :return:
+    """
     OTJS('Jupyter.notebook.select_next(true);' \
                'JPSLUtils.replace_text_of_current_cell("' + text + '");')
 
 def replace_text_of_current_cell(text):
+    """
+    Replaces the contents of the currently selected cell with the contents
+    of text.
+    :param text: String to replace the contents of the cell with.
+    :return:
+    """
     OTJS('JPSLUtils.replace_text_of_current_cell("' + text + '");')
 
 
 def insert_text_at_beginning_of_current_cell(text):
-    # append \n to line insert as a separate line.
+    """
+    Insert the contents of text at the beginning of the currently selected
+    cell. Append \n to line insert as a separate line.
+    :param text: String to insert into cell.
+    :return:
+    """
     OTJS('Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
            'setCursor({line:0,ch:0});' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
@@ -90,6 +126,12 @@ def insert_text_at_beginning_of_current_cell(text):
 
 
 def insert_newline_at_end_of_current_cell(text):
+    """
+    Insert the contents of text as a newline at the end of the currently
+    selected cell.
+    :param text: String of the text to be added to the end of the cell.
+    :return:
+    """
     OTJS('var lastline = Jupyter.notebook.get_selected_cell().' \
            'code_mirror.doc.lineCount();' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
@@ -101,13 +143,19 @@ def insert_newline_at_end_of_current_cell(text):
 def select_containing_cell(elemID):
     """
     Create a synthetic click in the cell to force selection of the cell
-    containing the table
+    containing the DOM element with the name matching the contents of elemID.
+    :param elemID: String containing the id of the DOM element.
+    :return:
     """
     OTJS('var elem = document.getElementById("'+elemID+'");' \
              'JPSLUtils.select_containing_cell(elem);')
     pass
 
 def delete_selected_cell():
+    """
+    Deletes the selected cell.
+    :return:
+    """
     OTJS('Jupyter.notebook.delete_cell(' \
                'Jupyter.notebook.get_selected_index());')
     pass
@@ -116,6 +164,13 @@ def delete_selected_cell():
 # Bookkeeping and anti-cheating tools
 ######
 def record_names_timestamp():
+    """
+    Creates a dialog to collect the names of the user and their partners.
+    This is recorded permanently as a comment at the end of the cell where
+    this is run. The cell should be protected, so that it cannot be
+    accidentally deleted.
+    :return:
+    """
     from os import environ, uname
     from time import ctime
     from IPython.display import display, HTML
@@ -129,6 +184,11 @@ def record_names_timestamp():
     pass
 
 def timestamp():
+    """
+    Displays an HTML timestamp, with user and computer info in the output of
+    the cell it is run in.
+    :return:
+    """
     from os import environ, uname
     from time import ctime
     from IPython.display import display, HTML
@@ -148,6 +208,7 @@ def havepd():
     Checks to see if pandas is imported into the ipython user namespace as pd.
     :return: True if the name pd refers to pandas, otherwise false.
     """
+    from IPython import get_ipython
     tst1 = getattr(get_ipython().user_module,'pd', False)
     if tst1:
         return hasattr(tst1,'DataFrame')
@@ -159,6 +220,7 @@ def havenp():
     Checks to see if numpy is imported into the ipython user namespace as np.
     :return: True if the name np refers to numpy, otherwise false.
     """
+    from IPython import get_ipython
     tst1 = getattr(get_ipython().user_module,'np',False)
     if tst1:
         return hasattr(tst1,'nan')
@@ -175,7 +237,7 @@ def find_pandas_dataframe_names():
     DataFrame objects. It will not find DataFrames that are children
     of objects in the interactive namespace. You will need to provide
     your own operation for finding those.
-    :return: type: list of string names for objects in the global interactive
+    :return: list of string names for objects in the global interactive
     namespace that are pandas DataFrames.
     """
     from pandas import DataFrame as df
@@ -196,7 +258,7 @@ def find_figure_names():
     FigureWidgets that are children of other objects. You will need to
     provide your own operation for finding those.
 
-    :return: type: list of string names for the objects in the global
+    :return: list of string names for the objects in the global
     interactive namespace that are plotly Figures or FigureWidgets.
     """
     from plotly.graph_objects import Figure, FigureWidget
