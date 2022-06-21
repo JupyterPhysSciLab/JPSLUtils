@@ -1,6 +1,6 @@
 # Development Notes
 
-## [Code Repository (Github)](https://github.com/JupyterPhysSciLab/JPSLUtils)
+## [Code Repository](https://github.com/JupyterPhysSciLab/JPSLUtils)
 
 ## Building Documentation
 
