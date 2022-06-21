@@ -48,7 +48,7 @@
         </ul>
 
 
-            <footer>JPSLUtils v0.6.0rc0</footer>
+            <footer>JPSLUtils v0.6.0</footer>
 
         <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
             built with <span class="visually-hidden">pdoc</span><img
@@ -88,7 +88,7 @@ inserting text into an existing cell, or running python code and using the
 result from javascript. Some custom dialogs for user interaction are also
 included.</li>
 <li><code>JPSL Tools</code> menu can be installed as well. The command to activate it 
-from python is <code>JPSL_Tools_Menu():</code>; from javascript 
+from python is <code>JPSLUtils.JPSL_Tools_Menu()</code>; from javascript 
 <code>JPSLUtils.createJPSLToolsMenu(); JPSLUtils.init();</code>. This provides menu 
 access to some of the javascript operations:
 <ul>
@@ -114,9 +114,9 @@ javascript.</li>
 <h2 id="change-log">Change Log</h2>
 
 <ul>
-<li>0.6.0rc
+<li>0.6.0
 <ul>
-<li>First pass at python API documentation..</li>
+<li>First pass at python API documentation.</li>
 <li>Python cell actions no longer run when a trusted notebook is opened 
 (using <code>OTJS()</code>).</li>
 <li>Reformatted the user name and partner information saved on each 

@@ -20,7 +20,7 @@ inserting text into an existing cell, or running python code and using the
 result from javascript. Some custom dialogs for user interaction are also
 included.
 * `JPSL Tools` menu can be installed as well. The command to activate it 
-  from python is `JPSL_Tools_Menu():`; from javascript 
+  from python is `JPSLUtils.JPSL_Tools_Menu()`; from javascript 
  `JPSLUtils.createJPSLToolsMenu(); JPSLUtils.init();`. This provides menu 
   access to some of the javascript operations:
     * **Hide cells** that are marked as `JPSL.hide_on_print=true` in the cell 
@@ -41,8 +41,8 @@ included.
   javascript.
 
 ## Change Log
-  * 0.6.0rc
-    * First pass at python API documentation..
+  * 0.6.0
+    * First pass at python API documentation.
     * Python cell actions no longer run when a trusted notebook is opened 
       (using `OTJS()`).
     * Reformatted the user name and partner information saved on each 
