@@ -2,6 +2,13 @@
 Utility routines that are useful for more than one package in the Jupyter
 Physical Science Lab modules.
 """
+
+######
+# General initialization
+######
+notebookenv = "None"
+# update_notebook_env() will be called after it is defined below.
+
 ######
 # JPSL Tools Menu
 ######
@@ -45,6 +52,17 @@ def OTJS(script):
     # print(scriptstr)
     display(JS(scriptstr))
     pass
+
+def update_notebook_env():
+    OTJS('JPSLUtils.getenv();')
+    try:
+        from google.colab import output
+        notebookenv = 'colab'
+    except ModuleNotFoundError:
+        pass
+    pass
+
+update_notebook_env() # figure out the notebook environment.
 
 def new_cell_immediately_below():
     """

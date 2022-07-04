@@ -3,6 +3,8 @@ JPSLUtils = new Object();
 /*
 Initialization
 */
+JPSLUtils.env = "None"
+
 JPSLUtils.init = function(){
     // Run all input table cells to make sure the tables are showing and
     // active. Also hide the table creation code.
@@ -18,6 +20,22 @@ JPSLUtils.init = function(){
     // Hide the code for cells marked with metadata.JPSL.hide_code = true.
     JPSLUtils.hide_hide_code_code();
 };
+
+JPSLUtils.getenv = function(){
+    if (typeof (Jupyter) != 'undefined'){
+        JPSLUtils.env = "NBClassic";
+    } else {
+        var configscript = document.getElementById("jupyter-config-data")
+        if (configscript){
+            var config = JSON.parse(configscript.innerText);
+            var name = config['appName'];
+            if (name){
+                JPSLUtils.env = name;
+            }
+        }
+    }
+    Jupyter.notebook.kernel.execute('JPSLUtils.notebookenv = "'+JPSLUtils.env+'"');
+}
 
 /*
 Cell Utilities
