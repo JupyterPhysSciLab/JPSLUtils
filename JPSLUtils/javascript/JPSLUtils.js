@@ -67,7 +67,7 @@ JPSLUtils.text_of_current_cell_to_Python = function(varName){
     }
     var cmdstr = '"'+varName+' = \"'+ text +'\""';
     //alert (cmdstr);
-    JPSLUtils.wait_for_python('\'' + cmdstr+'\')
+    JPSLUtils.wait_for_python('\'' + cmdstr+'\');
         //.then(resolve => JPSLUtils.wait_for_python(
         //'print(JPSLUtils.return_text_of_current_cell())');
         //.then(reject => alert(reject));

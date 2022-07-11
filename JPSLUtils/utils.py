@@ -104,11 +104,16 @@ def move_cursor_in_current_cell(delta):
 
 def escape_text_for_js(text):
     """
-    Escapes \n to \\n to prevent issues in js.
+    Escapes \n to \\n, \" to \\" and \' to \\' to prevent issues in js.
     :param text:
     :return:
     """
-    return text.replace('\\n','\n').replace('\n','\\n')
+    import re
+    text = re.sub(r'\\n',r'\n',text)
+    text = re.sub(r'\n',r'\\n',text)
+    text = re.sub(r'\'',r'\'',text)
+    text = re.sub(r'\"', r'\"', text)
+    return text
 
 def insert_text_into_next_cell(text):
     """
