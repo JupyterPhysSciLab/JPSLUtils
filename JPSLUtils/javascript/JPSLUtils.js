@@ -3,7 +3,7 @@ JPSLUtils = new Object();
 /*
 Initialization
 */
-JPSLUtils.env = "None"
+JPSLUtils.env = "None";
 
 JPSLUtils.init = function(){
     // Run all input table cells to make sure the tables are showing and
@@ -24,6 +24,7 @@ JPSLUtils.init = function(){
 JPSLUtils.getenv = function(){
     if (typeof (Jupyter) != 'undefined'){
         JPSLUtils.env = "NBClassic";
+        Jupyter.notebook.kernel.execute('JPSLUtils.notebookenv = "'+JPSLUtils.env+'"');
     } else {
         var configscript = document.getElementById("jupyter-config-data")
         if (configscript){
@@ -34,7 +35,6 @@ JPSLUtils.getenv = function(){
             }
         }
     }
-    Jupyter.notebook.kernel.execute('JPSLUtils.notebookenv = "'+JPSLUtils.env+'"');
 }
 
 /*
@@ -60,6 +60,18 @@ JPSLUtils.select_cell_immediately_below = function(){
     Jupyter.notebook.select_next(true);
 };
 
+JPSLUtils.text_of_current_cell_to_Python = function(varName){
+    var text = Jupyter.notebook.get_selected_cell().get_text();
+    if (typeof (text) == 'undefined'){
+        text = '';
+    }
+    var cmdstr = '"'+varName+' = \"'+ text +'\""';
+    //alert (cmdstr);
+    JPSLUtils.wait_for_python('\'' + cmdstr+'\')
+        //.then(resolve => JPSLUtils.wait_for_python(
+        //'print(JPSLUtils.return_text_of_current_cell())');
+        //.then(reject => alert(reject));
+    }
 JPSLUtils.replace_text_of_current_cell = function(text){
     Jupyter.notebook.get_selected_cell().set_text(text);
 };
@@ -69,7 +81,7 @@ JPSLUtils.insert_newline_at_end_of_current_cell = function(text){
         lineCount();
     Jupyter.notebook.get_selected_cell().code_mirror.doc.setCursor(lastline,0);
     Jupyter.notebook.get_selected_cell().code_mirror.doc.
-         replaceSelection("\n" + text);
+         replaceSelection("\\n" + text);
 };
 
 JPSLUtils.insert_text_at_beginning_of_current_cell = function(text){
@@ -199,6 +211,21 @@ JPSLUtils.record_input = function (element){
 /*
 Python Execution
 */
+JPSLUtils.wait_for_python = function(cmdstr){
+    return new Promise((resolve,reject) => {
+        var callbacks = {
+            iopub: {
+                output: (data) => resolve(data.content.text.trim())
+            },
+
+            shell: {
+                reply: (data) => resolve(data.content.status)
+            }
+
+        };
+        Jupyter.notebook.kernel.execute(cmdstr, callbacks);
+    });
+}
 
 JPSLUtils.executePython = function(python) {
     return new Promise((resolve, reject) => {
@@ -260,7 +287,7 @@ JPSLUtils.record_names = function(){
                                     //tmpstr.replace(refeed,'; ');
                                     tmp.innerHTML = tmpstr;
                                     tmpstr = '# '+rcrd.innerHTML.replaceAll
-                                    ('|','\n# ') +'\n#  '+tmpstr;
+                                    ('|','\\n# ') +'\\n#  '+tmpstr;
                                     //rcrd.append(tmp);
                                     JPSLUtils.
                                     insert_newline_at_end_of_current_cell(

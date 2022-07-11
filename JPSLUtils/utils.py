@@ -7,6 +7,7 @@ Physical Science Lab modules.
 # General initialization
 ######
 notebookenv = "None"
+temptext = ''
 # update_notebook_env() will be called after it is defined below.
 
 ######
@@ -62,8 +63,6 @@ def update_notebook_env():
         pass
     pass
 
-update_notebook_env() # figure out the notebook environment.
-
 def new_cell_immediately_below():
     """
     Inserts a new cell immediately below the currently selected cell.
@@ -82,6 +81,13 @@ def select_cell_immediately_below():
     OTJS('Jupyter.notebook.select_next(true);')
     pass
 
+def get_text_of_current_cell():
+    OTJS("JPSLUtils.text_of_current_cell_to_Python(\"JPSLUtils.temptext\");")
+    pass
+
+def return_text_of_current_cell():
+    return temptext
+
 def move_cursor_in_current_cell(delta):
     """
     Moves the cursor by the amount delta in a codemirror cell.
@@ -96,6 +102,13 @@ def move_cursor_in_current_cell(delta):
                      'doc.setCursor({line:curline,ch:curch});')
     pass
 
+def escape_text_for_js(text):
+    """
+    Escapes \n to \\n to prevent issues in js.
+    :param text:
+    :return:
+    """
+    return text.replace('\\n','\n').replace('\n','\\n')
 
 def insert_text_into_next_cell(text):
     """
@@ -104,6 +117,7 @@ def insert_text_into_next_cell(text):
     :param text: String to replace the selection with.
     :return:
     """
+    text = escape_text_for_js(text)
     OTJS('Jupyter.notebook.select_next(true);' \
                'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
                'replaceSelection("' + text + '");')
@@ -116,6 +130,7 @@ def replace_text_of_next_cell(text):
     :param text: String to replace the contents of the cell wtih.
     :return:
     """
+    text = escape_text_for_js(text)
     OTJS('Jupyter.notebook.select_next(true);' \
                'JPSLUtils.replace_text_of_current_cell("' + text + '");')
 
@@ -126,6 +141,7 @@ def replace_text_of_current_cell(text):
     :param text: String to replace the contents of the cell with.
     :return:
     """
+    text = escape_text_for_js(text)
     OTJS('JPSLUtils.replace_text_of_current_cell("' + text + '");')
 
 
@@ -136,6 +152,7 @@ def insert_text_at_beginning_of_current_cell(text):
     :param text: String to insert into cell.
     :return:
     """
+    text = escape_text_for_js(text)
     OTJS('Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
            'setCursor({line:0,ch:0});' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
@@ -150,6 +167,7 @@ def insert_newline_at_end_of_current_cell(text):
     :param text: String of the text to be added to the end of the cell.
     :return:
     """
+    text = escape_text_for_js(text)
     OTJS('var lastline = Jupyter.notebook.get_selected_cell().' \
            'code_mirror.doc.lineCount();' \
            'Jupyter.notebook.get_selected_cell().code_mirror.doc.' \
@@ -453,3 +471,5 @@ del mydir
 del display
 del HTML
 del os
+
+update_notebook_env() # figure out the notebook environment.
