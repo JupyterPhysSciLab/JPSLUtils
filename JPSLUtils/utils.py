@@ -104,7 +104,10 @@ def move_cursor_in_current_cell(delta):
 
 def escape_text_for_js(text):
     """
-    Escapes \n to \\n, \" to \\" and \' to \\' to prevent issues in js.
+    To prevent issues in javascript escapes:
+    \n to \\n,
+    \" to \\"
+    \' to \\'
     :param text:
     :return:
     """
@@ -114,6 +117,18 @@ def escape_text_for_js(text):
     text = re.sub(r'\'',r'\'',text)
     text = re.sub(r'\"', r'\"', text)
     return text
+
+def pseudoLatexToLatex(text):
+    text = text.replace('%FRAC',r'\frac')
+    text = text.replace('%EXP',r'\exp')
+    text = text.replace('%SIN',r'\sin')
+    text = text.replace('%LEFT',r'\left')
+    text = text.replace('%RIGHT',r'\right')
+    text = text.replace('%SQRT',r'\sqrt')
+    text = text.replace('%PI',r'\pi')
+    text = text.replace('%COLOR',r'\color')
+    return(text);
+
 
 def insert_text_into_next_cell(text):
     """
@@ -136,8 +151,10 @@ def replace_text_of_next_cell(text):
     :return:
     """
     text = escape_text_for_js(text)
-    OTJS('Jupyter.notebook.select_next(true);' \
-               'JPSLUtils.replace_text_of_current_cell("' + text + '");')
+    cmdstr = 'Jupyter.notebook.select_next(true);' \
+             'JPSLUtils.replace_text_of_current_cell("' + text + '");'
+    # print(cmdstr)
+    OTJS(cmdstr)
 
 def replace_text_of_current_cell(text):
     """

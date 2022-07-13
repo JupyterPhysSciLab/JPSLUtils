@@ -38,6 +38,22 @@ JPSLUtils.getenv = function(){
 };
 
 /*
+Latex utilities
+*/
+
+JPSLUtils.pseudoLatexToLatex = function(text){
+    text = text.replaceAll('%FRAC','\\frac');
+    text = text.replaceAll('%EXP','\\exp');
+    text = text.replaceAll('%SIN','\\sin');
+    text = text.replaceAll('%LEFT','\\left');
+    text = text.replaceAll('%RIGHT','\\right');
+    text = text.replaceAll('%SQRT','\\sqrt');
+    text = text.replaceAll('%PI','\\pi');
+    text = text.replaceAll('%COLOR','\\color');
+    return(text);
+};
+
+/*
 Cell Utilities
 */
 
@@ -74,6 +90,7 @@ JPSLUtils.text_of_current_cell_to_Python = function(varName){
 };
 
 JPSLUtils.replace_text_of_current_cell = function(text){
+    text = JPSLUtils.pseudoLatexToLatex(text);
     Jupyter.notebook.get_selected_cell().set_text(text);
 };
 
