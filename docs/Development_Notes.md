@@ -52,13 +52,3 @@ Proceed only if testing of the build is successful.
 4. Make sure it works by installing it in a clean virtual environment. This
    is the same as on test.pypi.org except without `-i https://test.pypy...`. If
    it does not work, pull the release.
-
-## Building Documentation
-
-1. Install or update pdoc into the virtual environment `pip install -U pdoc`.
-2. Make edits to the `.md` files within the docs folder that are to be 
-   included in the first page (see `__init__.py` of the jupyterpidaq package).
-3. At the root level run `pdoc 
---logo JPSLUtils-logo.svg --logo-link 
-   https://jupyterphysscilab.github.io/JPSLUtils/ --footer-text 
-   "JPSLUtils vX.X.X" -html -o docs JPSLUtils`

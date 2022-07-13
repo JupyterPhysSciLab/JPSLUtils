@@ -41,6 +41,15 @@ included.
   javascript.
 
 ## Change Log
+  * 0.7.0rc0
+    * Enhancements to latex and string escaping to support JupyterLab and 
+      Colab.
+    * Now checks for the environment it is running in (JLab, Colab or 
+      NBClassic) and sets the python variable `JPSLUtils.notebookenv = 
+      "NBClassic|colab|None"`. `None` probably means JLab.
+      The javascript variable `JPSLUtils.env = "NBClassic|JupyterLab|None"` 
+      depending upon the environment.
+    * Typo and minor bug fixes.
   * 0.6.0
     * First pass at python API documentation.
     * Python cell actions no longer run when a trusted notebook is opened 
