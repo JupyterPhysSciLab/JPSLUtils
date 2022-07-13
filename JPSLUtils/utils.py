@@ -477,4 +477,5 @@ del display
 del HTML
 del os
 
-update_notebook_env() # figure out the notebook environment.
+#update_notebook_env() # This is called once the JavaScript tools are
+# initialized

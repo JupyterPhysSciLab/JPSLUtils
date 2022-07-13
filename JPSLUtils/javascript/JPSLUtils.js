@@ -26,7 +26,7 @@ JPSLUtils.getenv = function(){
         JPSLUtils.env = "NBClassic";
         Jupyter.notebook.kernel.execute('JPSLUtils.notebookenv = "'+JPSLUtils.env+'"');
     } else {
-        var configscript = document.getElementById("jupyter-config-data")
+        var configscript = document.getElementById("jupyter-config-data");
         if (configscript){
             var config = JSON.parse(configscript.innerText);
             var name = config['appName'];
@@ -35,7 +35,7 @@ JPSLUtils.getenv = function(){
             }
         }
     }
-}
+};
 
 /*
 Cell Utilities
@@ -67,11 +67,12 @@ JPSLUtils.text_of_current_cell_to_Python = function(varName){
     }
     var cmdstr = '"'+varName+' = \"'+ text +'\""';
     //alert (cmdstr);
-    JPSLUtils.wait_for_python('\'' + cmdstr+'\');
+    JPSLUtils.wait_for_python('\'' + cmdstr+'\'');
         //.then(resolve => JPSLUtils.wait_for_python(
         //'print(JPSLUtils.return_text_of_current_cell())');
         //.then(reject => alert(reject));
-    }
+};
+
 JPSLUtils.replace_text_of_current_cell = function(text){
     Jupyter.notebook.get_selected_cell().set_text(text);
 };
@@ -260,7 +261,7 @@ JPSLUtils.record_names = function(){
     var tmp = document.createElement('H4');
     var inststr = "In the box below type your name and your partners' names";
     inststr += " (one per line):";
-    tmp.innerHTML=inststr
+    tmp.innerHTML=inststr;
     dlg.append(tmp);
     tmp = document.createElement('div');
     tmp.innerHTML = '<textarea cols="30" onblur="JPSLUtils.record_input(this)"/>';
@@ -386,4 +387,6 @@ JPSLUtils.createJPSLToolsMenu = function(){
                     };
         JPSLMenus.build(menu);
     }
-}
+};
+
+JPSLUtils.getenv();
