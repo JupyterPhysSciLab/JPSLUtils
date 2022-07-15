@@ -41,9 +41,9 @@ included.
   javascript.
 
 ## Change Log
-  * 0.7.0rc0
+  * 0.7.0
     * Enhancements to latex and string escaping to support JupyterLab and 
-      Colab.
+      Colab. This breaks jupyter-pandas-GUI <=0.6.2.1.
     * Now checks for the environment it is running in (JLab, Colab or 
       NBClassic) and sets the python variable `JPSLUtils.notebookenv = 
       "NBClassic|colab|None"`. `None` probably means JLab.
