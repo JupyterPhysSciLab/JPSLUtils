@@ -54,14 +54,14 @@ def OTJS(script):
     display(JS(scriptstr))
     pass
 
-def update_notebook_env():
+def update_notebook_env(notebookenv):
     OTJS('JPSLUtils.getenv();')
     try:
         from google.colab import output
         notebookenv = 'colab'
     except ModuleNotFoundError:
         pass
-    pass
+    return notebookenv
 
 def new_cell_immediately_below():
     """
@@ -494,5 +494,4 @@ del display
 del HTML
 del os
 
-#update_notebook_env() # This is called once the JavaScript tools are
-# initialized
+notebookenv = update_notebook_env(notebookenv) # if in colab will update value
