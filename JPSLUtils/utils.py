@@ -38,7 +38,7 @@ def OTJS(script):
     :param script: valid javascript string.
     :return:
     """
-    from IPython.display import Javascript as JS
+    from IPython.display import display, Javascript as JS
     from time import time as baseseconds
     limit = 1000*(baseseconds()+15)
     scriptstr = """
