@@ -41,6 +41,12 @@ included.
   javascript.
 
 ## Change Log
+  * 0.7.2
+    * More \n escaping fixes.
+    * Made notebook environment testing wait asynchronously for JS.
+    * Now gets JS notebook environment info even when running as a submodule 
+      of another module.
+    * Docs updated to match.
   * 0.7.1
     * Additional escaping of \n fixes.
   * 0.7.0

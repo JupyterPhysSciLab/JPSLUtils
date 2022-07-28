@@ -6,6 +6,7 @@ Physical Science Lab modules.
 ######
 # General initialization
 ######
+import asyncio
 notebookenv = "None"
 temptext = ''
 # update_notebook_env() will be called after it is defined below.
@@ -54,8 +55,16 @@ def OTJS(script):
     display(JS(scriptstr))
     pass
 
-def update_notebook_env(notebookenv):
+async def update_notebook_env(notebookenv):
     OTJS('JPSLUtils.getenv();')
+    from asyncio import sleep
+    from IPython import get_ipython
+    await sleep(3)
+    # the below is to pick up the value dumped by javascript into the user
+    # namespace, in the case that we are running deep inside something else.
+    user_ns = get_ipython().user_ns
+    if "JPSLUtils" in user_ns:
+        notebookenv = user_ns['JPSLUtils'].notebookenv
     try:
         from google.colab import output
         notebookenv = 'colab'

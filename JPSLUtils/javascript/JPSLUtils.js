@@ -305,7 +305,7 @@ JPSLUtils.record_names = function(){
                                     //tmpstr.replace(refeed,'; ');
                                     tmp.innerHTML = tmpstr;
                                     tmpstr = '# '+rcrd.innerHTML.replaceAll
-                                    ('|','\\n# ') +'\\n#  '+tmpstr;
+                                    ('|','\n# ') +'\n#  '+tmpstr;
                                     //rcrd.append(tmp);
                                     JPSLUtils.
                                     insert_newline_at_end_of_current_cell(
