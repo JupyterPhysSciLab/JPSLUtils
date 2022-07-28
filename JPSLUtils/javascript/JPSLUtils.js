@@ -99,7 +99,7 @@ JPSLUtils.insert_newline_at_end_of_current_cell = function(text){
         lineCount();
     Jupyter.notebook.get_selected_cell().code_mirror.doc.setCursor(lastline,0);
     Jupyter.notebook.get_selected_cell().code_mirror.doc.
-         replaceSelection("\\n" + text);
+         replaceSelection("\n" + text);
 };
 
 JPSLUtils.insert_text_at_beginning_of_current_cell = function(text){

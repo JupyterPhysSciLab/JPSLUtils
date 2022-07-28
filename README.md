@@ -41,6 +41,8 @@ included.
   javascript.
 
 ## Change Log
+  * 0.7.1
+    * Additional escaping of \n fixes.
   * 0.7.0
     * Enhancements to latex and string escaping to support JupyterLab and 
       Colab. This breaks jupyter-pandas-GUI <=0.6.2.1.
