@@ -6,7 +6,6 @@ Physical Science Lab modules.
 ######
 # General initialization
 ######
-import asyncio
 notebookenv = "None"
 temptext = ''
 # update_notebook_env() will be called after it is defined below.
@@ -55,21 +54,26 @@ def OTJS(script):
     display(JS(scriptstr))
     pass
 
-async def update_notebook_env(notebookenv):
-    OTJS('JPSLUtils.getenv();')
-    from asyncio import sleep
+def update_notebook_env(notebookenv):
+    """
+    Checks notebook environment. Calls javascript to check for
+    Jupyter classic and Jupyter Lab. Sets JPSLUtils.notebookenv = colab|
+    NBClassic|None. None is probably Jupyter Lab.
+    :return:
+    """
     from IPython import get_ipython
-    await sleep(3)
-    # the below is to pick up the value dumped by javascript into the user
-    # namespace, in the case that we are running deep inside something else.
     user_ns = get_ipython().user_ns
-    if "JPSLUtils" in user_ns:
-        notebookenv = user_ns['JPSLUtils'].notebookenv
     try:
         from google.colab import output
         notebookenv = 'colab'
+        if "JPSLUtils" in user_ns:
+            user_ns['JPSLUtils'].notebookenv = notebookenv
+        return notebookenv
     except ModuleNotFoundError:
         pass
+    if "JPSLUtils" in user_ns:
+        notebookenv = user_ns['JPSLUtils'].notebookenv
+    OTJS('JPSLUtils.getenv();')
     return notebookenv
 
 def new_cell_immediately_below():
@@ -503,4 +507,4 @@ del display
 del HTML
 del os
 
-notebookenv = update_notebook_env(notebookenv) # if in colab will update value
+notebookenv = update_notebook_env(notebookenv)

@@ -24,7 +24,8 @@ JPSLUtils.init = function(){
 JPSLUtils.getenv = function(){
     if (typeof (Jupyter) != 'undefined'){
         JPSLUtils.env = "NBClassic";
-        Jupyter.notebook.kernel.execute('JPSLUtils.notebookenv = "'+JPSLUtils.env+'"');
+        var cmdstr = 'JPSLUtils.notebookenv = "'+JPSLUtils.env+'"'
+        Jupyter.notebook.kernel.execute(cmdstr);
     } else {
         var configscript = document.getElementById("jupyter-config-data");
         if (configscript){
