@@ -41,6 +41,11 @@ included.
   javascript.
 
 ## Change Log
+  * 0.7.3 
+    * More robust notebook environment detection by reordering of python 
+      and javascript calls.
+    * Removed asynchronous testing for environment.
+    * Updated docs.
   * 0.7.2
     * More \n escaping fixes.
     * Made notebook environment testing wait asynchronously for JS.

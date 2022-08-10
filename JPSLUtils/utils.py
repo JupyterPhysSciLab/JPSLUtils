@@ -62,7 +62,9 @@ def update_notebook_env(notebookenv):
     :return:
     """
     from IPython import get_ipython
-    user_ns = get_ipython().user_ns
+    user_ns = {}
+    if get_ipython():
+        user_ns = get_ipython().user_ns
     try:
         from google.colab import output
         notebookenv = 'colab'
