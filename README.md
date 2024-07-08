@@ -13,6 +13,10 @@ required by other packages/modules. **Currently, API documentation is only
 available for the python utilities.** You will have to look at the hints 
 below and the code to learn more about the javascript utilities.
 
+__Note__: Most tools in the package are for use with the classic Jupyter 
+notebook (usually referred to as `nbclassic`). Alternative packages are used 
+to provide the same capabilities in Jupyter Lab and Notebook >7 environments.
+
 ## Contents
 * This package mostly provides tools for running javascript operations that
 impact the notebook. This includes things such as selecting a certain cell,
@@ -41,6 +45,9 @@ included.
   javascript.
 
 ## Change Log
+  * 0.7.4 (July X 2024)
+    * BUG FIX: More checks to avoid JS errors in JLab, while maintaining 
+      NBClassic capabilities.
   * 0.7.3 
     * More robust notebook environment detection by reordering of python 
       and javascript calls.

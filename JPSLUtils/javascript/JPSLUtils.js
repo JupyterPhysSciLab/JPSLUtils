@@ -8,6 +8,10 @@ JPSLUtils.env = "None";
 JPSLUtils.init = function(){
     // Run all input table cells to make sure the tables are showing and
     // active. Also hide the table creation code.
+    if(JPSLUtils.env !='NBClassic'){
+        console.log('Not in classic notebook. Classic init skipped.');
+        return;
+    }
     JPSLUtils.hide_input_table_code();
     var celllist = Jupyter.notebook.get_cells();
     for (var i = 0;i<celllist.length;i++){
@@ -323,6 +327,10 @@ JPSLUtils.record_names = function(){
 JPSL Tools Menu
 */
 JPSLUtils.createJPSLToolsMenu = function(){
+    if(JPSLUtils.env !='NBClassic'){
+        console.log('Not in classic notebook. JPSL_Tools classic menu skipped.');
+        return;
+    }
     if(!document.getElementById('JPSL_Tools')){
         var hidecells = {'type':'action',
                             'title':'Hide Cells',
